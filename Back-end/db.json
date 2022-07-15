@@ -23,7 +23,7 @@
                     "bairro":"Cardoso",
                     "cidade":"Joinville",
                     "cep":"09530210",
-                    "estado":"Santa Catarina",
+                    "estado":"Santa Catarina", 
                     "pais":"Brasil"
                 }
             ]
@@ -52,3 +52,4 @@
         
     ]
 }
+

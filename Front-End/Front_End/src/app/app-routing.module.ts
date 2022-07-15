@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [];
+import { TelaPrincipalComponent } from './components/tela-principal/tela-principal.component';
+import { TelaEdicaoComponent } from './components/tela-edicao/tela-edicao.component';
+const routes: Routes = [
+    {path: '', component:TelaPrincipalComponent},
+    {path:'edit', component: TelaEdicaoComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
