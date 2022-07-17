@@ -1,0 +1,25 @@
+
+a {
+    color: aliceblue;
+    display: flex;
+    text-decoration: none;
+}
+#cds{
+    border: 1px solid;
+    padding: 1rem;
+    background-color: #0293ee;
+    font-weight: bold;
+    transition: 0.5s;
+    border-radius: 35px;
+}
+a:hover{
+color: #aecff2;
+}
+
+.container{
+    margin-top: 25rem;
+}
+
+#txt{
+   margin-left: 25rem;
+}
