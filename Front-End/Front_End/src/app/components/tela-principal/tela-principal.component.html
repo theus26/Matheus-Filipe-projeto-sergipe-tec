@@ -16,41 +16,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>MARIA CRISTINA PEREIRA</td>
-        <td>mcristina@gmail.com</td>
-        <td>939.587.900-97</td>
-        <td>(79) 32100044</td>
-        <td>(79) 9 9400-3345</td>
+      <tr *ngFor="let contribuente of contribuentes">
+        <td>{{contribuente.id}}</td>
+        <td >{{contribuente.nome}}</td>
+        <td>{{contribuente.email}}</td>
+        <td>{{contribuente.cpf}}</td>
+        <td>{{contribuente.telefone}}</td>
+        <td>{{contribuente.celular}}</td>
         <td>
-            <button type="button" class="btn btn-secondary" (click)="openModal()">Endereço</button>
+            <button type="button" class="btn btn-ligth" data-mdb-ripple-color="dark" (click)="openModal()">Endereço</button>
         </td> 
         <td>  <div class="butoes">
-         <button type="button" class="btn btn-outline-warning">Editar</button> &nbsp;
-        <button type="button" class="btn btn-outline-danger">Excluir</button> 
+         <button routerLink="/Editar" type="button" class="btn btn-outline-warning" (click)="onEdit()">Editar</button> &nbsp;
+        <button type="button" class="btn btn-outline-danger" (click)="removeContribuentes(contribuente)">Excluir</button> 
         </div></td>
       
       </tr>
-      <tr>
-        <tr>
-            <td>2</td>
-            <td>JOÃO AUGUSTO DE SOUZA</td>
-            <td>jaugusto@gmail.com</td>
-            <td>17737300023</td>
-            <td>7932100055</td>
-            <td>799940033466</td>
-            <td>
-                <button type="button" class="btn btn-secondary" (click)="openModal()">Endereço</button>
-            </td> 
-            <td>
-
-                <div class="butoes">
-                    <button type="button" class="btn btn-outline-warning">Editar</button> &nbsp;
-               <button type="button" class="btn btn-outline-danger">Excluir</button> 
-           </div>
-            </td>
-          </tr>
+      
     </tbody>
   </table>
 </div>
@@ -79,25 +61,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Pablo Picasso</td>
-        <td>43</td>
-        <td>Suíça</td>
-        <td>Aracaju</td>
-        <td>49091-040</td>
-        <td>Sergipe</td>
-        <td>Brasil</td>
-      </tr>
-      <tr>
-        <td>Pablo Picasso</td>
-        <td>43</td>
-        <td>Suíça</td>
-        <td>Aracaju</td>
-        <td>49091-040</td>
-        <td>Sergipe</td>
-        <td>Brasil</td>
+      <tr *ngFor="let contribuente of contribuentes">
+       
+          <th>{{contribuente.enderecos[0].rua}}</th>
+          <th>{{contribuente.enderecos[0].numero}}</th>
+          <th>{{contribuente.enderecos[0].bairro}}</th>
+          <th>{{contribuente.enderecos[0].cidade}}</th>
+          <th>{{contribuente.enderecos[0].cep}}</th>
+          <th>{{contribuente.enderecos[0].estado}}</th>
+          <th>{{contribuente.enderecos[0].pais}}</th>
+         
 
       </tr>
+    
     </tbody>
   </table>
 </div>

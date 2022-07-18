@@ -1,0 +1,14 @@
+
+h1{
+    padding-top: 20px;
+    text-align: center;
+    padding-bottom:40px ;
+}
+.title{
+    padding: 1rem;
+    font-weight: bold;
+}
+
+#btn{
+    margin-top: 3rem;
+}

@@ -6,11 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tela-edicao.component.css']
 })
 export class TelaEdicaoComponent implements OnInit {
-
-  constructor() { }
+ 
 
   ngOnInit(): void {
     
   }
-
+ 
+  onEdit(){
+  console.log("hfeuiewuif")
+  }
 }
