@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from 'src/app/service/list.service'
 import {Contribuentes} from 'src/app/Contribuentes'
+import {ActivatedRoute, Router} from '@angular/router'
+
 
 declare var window:any; 
 
@@ -11,13 +13,16 @@ declare var window:any;
 })
 export class TelaPrincipalComponent implements OnInit {
 contribuentes: Contribuentes[] = []
+item: String = ''
+
 
 
 contribuentess = '';
 
   formModal:any;
-  constructor(private listservice: ListService) { 
+  constructor(private listservice: ListService, private router:Router, private route:ActivatedRoute) { 
     this.getContribuentes()
+
   }
 
   ngOnInit(): void {
@@ -27,6 +32,8 @@ this.formModal = new window.bootstrap.Modal(
 );
     
   }
+
+  
 
   getContribuentes(): void{
     //acessa o metodo service
@@ -38,9 +45,18 @@ this.formModal = new window.bootstrap.Modal(
     this.listservice.remove(contribuente.id).subscribe()
   }
 
+  updateForm(curso){
+    this.formModal.patchValue({
+      nome: curso.nome,
+      id: curso.id
+    })
+  }
 
-  openModal(){
+
+  openModal(event){
+    this.item = event.target.parentNode.innerText
     this.formModal.show();
+   
     
   }
 
@@ -48,8 +64,20 @@ this.formModal = new window.bootstrap.Modal(
     this.formModal.hide();
   }
 
-  onEdit(){
-    
+  onEdit(x =1){
+    console.log("Editado")
+    this.router.navigate(['Editar', x], {relativeTo:this.route})
+    this.route.params.subscribe(
+      (params:any) =>{
+        const id = params = x
+        console.log(id)
+
+        const curso$ = this.listservice.loadByID(id);
+        curso$.subscribe(curso=>{
+          this.updateForm(curso)
+        })
+      }
+    )
   }
 
 }

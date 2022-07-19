@@ -9,6 +9,7 @@
             </div>
             <div *ngIf="nome.invalid && formDir.submitted" class="validation-error">
                 <p *ngIf="nome.errors?.['required']">O nome é Obrigatório</p>
+                <p *ngIf="nome.errors?.['minLength']">Numero de Caracteres insuficiente</p>
             </div>
         </div>
 
@@ -19,6 +20,7 @@
             </div>
             <div *ngIf="cpf.invalid && formDir.submitted" class="validation-error">
                 <p *ngIf="cpf.errors?.['required']">O CPF é Obrigatório</p>
+                <p *ngIf="cpf.errors?.['maxLength']">Numero de Caracteres insuficiente</p>
             </div>
         </div>
 
@@ -30,15 +32,17 @@
             </div>
             <div *ngIf="email.invalid && formDir.submitted" class="validation-error">
                 <p *ngIf="email.errors?.['required']">O Email é Obrigatório</p>
+                <p *ngIf="email.errors?.['email']">Email Inválido</p>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-outline">
-                <input type="tel" class="form-control" id="validationCustom03" formControlName="telefone" required maxlength="12" />
+                <input type="tel" class="form-control" id="validationCustom03" formControlName="telefone" required maxlength="11" />
                 <label for="validationCustom03" class="form-label" >Telefone*</label>
             </div>
             <div *ngIf="telefone.invalid && formDir.submitted" class="validation-error">
                 <p *ngIf="telefone.errors?.['required']">O Telefone é Obrigatório</p>
+                <p *ngIf="telefone.errors?.['maxLength']">O Telefone</p>
             </div>
         </div>
         <div class="col-md-6">
@@ -50,12 +54,9 @@
                 <p *ngIf="celular.errors?.['required']">O Celular é Obrigatório</p>
             </div>
         </div>
-        <div class="title">
-
-            Endereço:
-        </div>
-        <div class="container" class="row g-3">
-          
+       
+        <div class="row g-3">
+            <div class="title">Endereço: </div>
 
                 <div class="col-md-12">
                     <div class="form-outline">
@@ -63,13 +64,18 @@
                             required formControlName="rua" />
                         <label for="validationCustom01" class="form-label">Rua*</label>
                     </div>
+                    <div *ngIf="rua.invalid && formDir.submitted" class="validation-error">
+                        <p *ngIf="rua.errors?.['required']">Campo Obrigatorio</p>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-outline">
                         <input type="text" class="form-control" id="validationCustom01" formControlName="numero" value="" required />
                         <label for="validationCustom01" class="form-label">Numero*</label>
-
+                    </div>
+                    <div *ngIf="numero.invalid && formDir.submitted" class="validation-error">
+                        <p *ngIf="numero.errors?.['required']">Campo Obrigatorio</p>
                     </div>
                 </div>
 
@@ -78,20 +84,27 @@
                         <input type="text" class="form-control" id="validationCustomUsername"
                             aria-describedby="inputGroupPrepend" formControlName="bairro" required />
                         <label for="validationCustomUsername" class="form-label">Bairro*</label>
-
+                    </div>
+                    <div *ngIf="bairro.invalid && formDir.submitted" class="validation-error">
+                        <p *ngIf="bairro.errors?.['required']">Campo Obrigatorio</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-outline">
                         <input type="tel" class="form-control" id="validationCustom03" formControlName="cidade" required />
                         <label for="validationCustom03" class="form-label">Cidade*</label>
-
+                    </div>
+                    <div *ngIf="cidade.invalid && formDir.submitted" class="validation-error">
+                        <p *ngIf="cidade.errors?.['required']">Campo Obrigatorio</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-outline">
                         <input type="text" class="form-control" id="validationCustom05" formControlName="cep" required />
                         <label for="validationCustom05" class="form-label">CEP*</label>
+                    </div>
+                    <div *ngIf="cep.invalid && formDir.submitted" class="validation-error">
+                        <p *ngIf="cep.errors?.['required']">Campo Obrigatorio</p>
                     </div>
                 </div>
 
@@ -100,6 +113,9 @@
                         <input type="text" class="form-control" id="validationCustom05" formControlName="estado" required />
                         <label for="validationCustom05" class="form-label">Estado*</label>
                     </div>
+                    <div *ngIf="estado.invalid && formDir.submitted" class="validation-error">
+                        <p *ngIf="estado.errors?.['required']">Campo Obrigatorio</p>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
@@ -107,12 +123,20 @@
                         <input type="text" class="form-control" id="validationCustom05" formControlName="pais" required />
                         <label for="validationCustom05" class="form-label">País*</label>
                     </div>
+                    <div *ngIf="pais.invalid && formDir.submitted" class="validation-error">
+                        <p *ngIf="pais.errors?.['required']">Campo Obrigatorio</p>
+                    </div>
                 </div>
+
+                
 
                 <div class="col-12">
                     <button class="btn btn-primary" type="submit" id="btn">Cadastrar</button>
                 </div>
 
+
+
+                
 
            
         </div>

@@ -1,9 +1,10 @@
+
 <canvas class="my-4 w-100" id="myChart" width="900" height="20"></canvas>
 
-<h2 id="title">Listagem de Contribuentes</h2>
+<h1 id="title">Listagem de Contribuentes</h1>
 <div class="table-responsive" id="tbl">
   <table class="table table-hover">
-    <thead>
+    <thead >
       <tr>
         <th>Id</th>
         <th>Nome</th>
@@ -17,14 +18,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let contribuente of contribuentes">
-        <td>{{contribuente.id}}</td>
-        <td >{{contribuente.nome}}</td>
-        <td>{{contribuente.email}}</td>
-        <td>{{contribuente.cpf}}</td>
-        <td>{{contribuente.telefone}}</td>
-        <td>{{contribuente.celular}}</td>
-        <td>
-            <button type="button" class="btn btn-ligth" data-mdb-ripple-color="dark" (click)="openModal()">Endereço</button>
+        <td (click)="openModal($event)">{{contribuente.id}}</td>
+        <td (click)="openModal($event)">{{contribuente.nome}}</td>
+        <td (click)="openModal($event)">{{contribuente.email}}</td>
+        <td (click)="openModal($event)">{{contribuente.cpf}}</td>
+        <td (click)="openModal($event)">{{contribuente.telefone}}</td>
+        <td (click)="openModal($event)">{{contribuente.celular}}</td>
+        <td (click)="openModal($event)" id="tdBtn">
+           Endereço 
         </td> 
         <td>  <div class="butoes">
          <button routerLink="/Editar" type="button" class="btn btn-outline-warning" (click)="onEdit()">Editar</button> &nbsp;
@@ -43,36 +44,37 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Endereços</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="doSomething()">X</button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close" (click)="doSomething()">x</button>
         </div>
       <canvas class="my-4 w-100" id="myChart" width="1000" height="20"></canvas>
 <div class="table-responsive">
   <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Rua</th>
-        <th>Numero</th>
-        <th>Bairro</th>
-        <th>Cidade</th>
-        <th>Cep</th>
-        <th>Estado</th>
-        <th>País</th>
+    <thead >
+      <tr class="lineSubtitle">
+        <th  >Rua</th>
+        <th >Numero</th>
+        <th >Bairro</th>
+        <th >Cidade</th>
+        <th >Cep</th>
+        <th >Estado</th>
+        <th >País</th>
        
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let contribuente of contribuentes">
-       
-          <th>{{contribuente.enderecos[0].rua}}</th>
-          <th>{{contribuente.enderecos[0].numero}}</th>
-          <th>{{contribuente.enderecos[0].bairro}}</th>
-          <th>{{contribuente.enderecos[0].cidade}}</th>
-          <th>{{contribuente.enderecos[0].cep}}</th>
-          <th>{{contribuente.enderecos[0].estado}}</th>
-          <th>{{contribuente.enderecos[0].pais}}</th>
-         
-
-      </tr>
+      <div *ngFor="let contribuente of contribuentes" >
+        <div *ngIf="item[0] == contribuente.id.toString()" >
+          <tr *ngFor="let endereco of contribuente.enderecos">
+            <th>{{endereco.rua}}</th>
+            <th>{{endereco.numero}}</th>
+            <th>{{endereco.bairro}}</th>
+            <th>{{endereco.cidade}}</th>
+            <th>{{endereco.cep}}</th>
+            <th>{{endereco.estado}}</th>
+            <th>{{endereco.pais}}</th>
+          </tr>
+        </div>
+      </div>
     
     </tbody>
   </table>

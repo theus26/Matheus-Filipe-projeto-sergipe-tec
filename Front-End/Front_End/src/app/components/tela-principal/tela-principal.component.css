@@ -6,3 +6,17 @@ padding-left: 2rem;
     text-align: center;
     margin-bottom: 3rem;
 }
+
+#tdBtn{
+    cursor: pointer;
+    transition: 5;
+}
+#tdBtn:hover{
+    color:#0069D9 ;
+}
+
+.lineSubtitle{
+    display: flex;
+    padding-right: 300px;
+ 
+}

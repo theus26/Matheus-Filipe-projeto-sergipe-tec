@@ -1,9 +1,9 @@
 .container{
-   margin-top: 8rem;
-   margin-left: 20rem;
+ display: flex;
+ margin-top: 150px;
    max-width: 50%;
 }
 .btns{
-    margin-left: 4rem;
+    margin-left: 1rem;
     margin-top: 1rem;    
 }

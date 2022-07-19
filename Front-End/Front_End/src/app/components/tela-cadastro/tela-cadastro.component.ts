@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router'
 
 
 
@@ -9,18 +10,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./tela-cadastro.component.css']
 })
 export class TelaCadastroComponent implements OnInit {
-  cadastroUser!:FormGroup
-  constructor() {
-   }
+  cadastroUser!: FormGroup
+  constructor( private router:Router, private route:ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
-    
+
     (() => {
       'use strict';
-    
+
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
       const forms = document.querySelectorAll('.needs-validation');
-    
+
       // Loop over them and prevent submission
       Array.prototype.slice.call(forms).forEach((form) => {
         form.addEventListener('submit', (event) => {
@@ -33,107 +35,110 @@ export class TelaCadastroComponent implements OnInit {
       });
     })();
 
-    
+
+ 
+
+
     this.cadastroUser = new FormGroup({
       id: new FormControl(``),
-      nome: new FormControl(``, [Validators.required]),
-      email: new FormControl(``,[Validators.required]),
-      cpf: new FormControl(``,[Validators.required]),
-      telefone: new FormControl(``,[Validators.required]),
-      celular: new FormControl(``,[Validators.required]),
-      rua:  new FormControl(``,[Validators.required]),
-      numero:  new FormControl(``,[Validators.required]),
-      bairro:  new FormControl(``,[Validators.required]),
-      cidade:  new FormControl(``,[Validators.required]),
-      estado:  new FormControl(``,[Validators.required]),
-      pais:  new FormControl(``,[Validators.required]),
-      cep:  new FormControl(``,[Validators.required]),
-      
+      nome: new FormControl(``, [Validators.required, Validators.minLength(3)]),
+      email: new FormControl(``, [Validators.required,Validators.email]),
+      cpf: new FormControl(``, [Validators.required,Validators.maxLength(15)]),
+      telefone: new FormControl(``, [Validators.required, Validators.maxLength(11)]),
+      celular: new FormControl(``, [Validators.required]),
+      rua: new FormControl(``, [Validators.required]),
+      numero: new FormControl(``, [Validators.required]),
+      bairro: new FormControl(``, [Validators.required]),
+      cidade: new FormControl(``, [Validators.required]),
+      estado: new FormControl(``, [Validators.required]),
+      pais: new FormControl(``, [Validators.required]),
+      cep: new FormControl(``, [Validators.required]),
+
     });
   }
 
 
-  get nome(){
+  get nome() {
     return this.cadastroUser.get('nome')!;
   }
 
-  get email(){
+  get email() {
     return this.cadastroUser.get('email')!;
   }
 
-  get cpf(){
+  get cpf() {
     return this.cadastroUser.get('cpf')!;
   }
 
-  get telefone(){
+  get telefone() {
     return this.cadastroUser.get('telefone')!;
   }
-  get rua(){
+  get rua() {
     return this.cadastroUser.get('rua')!;
   }
 
-  get numero(){
+  get numero() {
     return this.cadastroUser.get('numero')!;
   }
 
-  get bairro(){
+  get bairro() {
     return this.cadastroUser.get('bairro')!;
   }
 
-  get cep(){
+  get cep() {
     return this.cadastroUser.get('cep')!;
   }
 
-  get cidade(){
+  get cidade() {
     return this.cadastroUser.get('cidade')!;
   }
 
-  get estado(){
+  get estado() {
     return this.cadastroUser.get('estado')!;
   }
 
-  get pais(){
+  get pais() {
     return this.cadastroUser.get('pais')!;
   }
 
-  get celular(){
+  get celular() {
     return this.cadastroUser.get('celular')!;
   }
 
 
+  async submit() {
+ 
 
+    if (this.cadastroUser.invalid) {
+      return;
+    }
+    const data = {
+      nome: this.nome.value,
+      email: this.email.value,
+      cpf: this.cpf.value,
+      telefone: this.telefone.value,
+      celular: this.telefone.value,
+      rua: this.rua.value,
+      numero:this.numero.value,
+      bairro:this.bairro.value,
+      cidade:this.cidade.value,
+      cep:this.cep.value,
+      estado:this.estado.value,
+      pais:this.pais.value
+    }
+    const dataJson = JSON.stringify(data);
+    const req = await fetch("http://localhost:3000/Contribuintes", {
+      method: "POST",
+      headers: { "content-type": "application/json" }, 
+      body: dataJson,
+    }); 
+    const receber = await req.json(); 
+    console.log(receber);
 
- async submit(){
-      //e.preventDefault()
-      if (this.cadastroUser.invalid){
-        return;
-      }
-      const data = {
-        nome: this.nome.value,
-        email: this.email.value,
-        cpf:this.cpf.value,
-        telefone:this.telefone.value,
-        celular:this.telefone.value,
-        rua:this.rua.value
-        
+    setTimeout( () => {
+      this.router.navigate([''], {relativeTo:this.route})
+    },3000)
 
-      }
-      const dataJson = JSON.stringify(data);
-      const req = await fetch("http://localhost:3000/Contribuintes", {
-        method: "POST",
-        headers: { "content-type": "application/json" }, // estou dizendo que o tipo de dado enviado é o JSON
-        body: dataJson,
-      }); // aqui estou fazendo a requisição pra enviar meus dados para meu arquivo bd.json, usando um metodo, especificações e o arquivo de texto
-      const receber = await req.json(); // recebendo os meus dados json
-      console.log(receber);
-
-     // console.log(dataJson)
-
-      
-      //console.log(this.cadastroUser.value)
-
-
-      
   }
 
 
