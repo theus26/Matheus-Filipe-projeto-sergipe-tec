@@ -1,9 +1,14 @@
-
+<div class="alert alert-success" role="alert" *ngIf="editado" id="message" >
+  Usuario Editado Com sucesso !
+ </div>
+ <div class="alert alert-danger" role="alert" *ngIf="Neditado" id="message" >
+  Não foi possivel Editar !
+ </div>
 <div class="container" >
-  <form (ngSubmit)="submit()" [formGroup]="cadastroUser" #formDir="ngForm" class="row g-3 needs-validation" novalidate>
+  <form (ngSubmit)="submit()" [formGroup]="editUser" #formDir="ngForm" class="row g-3 needs-validation" novalidate>
       <div class="col-md-12">
           <div class="form-outline" >   
-                <input type="text" class="form-control" id="validationCustom01" maxlength="3" required value=""  />
+                <input type="text" class="form-control" id="validationCustom01" minlength="3" required  formControlName="nome"/>
                 <label for="validationCustom01" class="form-label">Nome Completo*</label>
           </div>
           <div *ngIf="nome.invalid && formDir.submitted" class="validation-error">
@@ -14,32 +19,45 @@
 
       <div class="col-md-6">
           <div class="form-outline">
-              <input type="text" class="form-control" id="validationCustom01" required />
+              <input type="text" class="form-control" id="validationCustom01" formControlName="cpf" required />
               <label for="validationCustom01" class="form-label">CPF*</label>
-
           </div>
+          <div *ngIf="nome.invalid && formDir.submitted" class="validation-error">
+            <p *ngIf="nome.errors?.['required']">O CPF é Obrigatório</p>
+            <p *ngIf="nome.errors?.['minLength']">Numero de Caracteres insuficiente</p>
+        </div>
       </div>
 
       <div class="col-md-6">
           <div class=" form-outline">
-              <input type="text" class="form-control" id="validationCustomUsername"
-                  aria-describedby="inputGroupPrepend" required />
+              <input type="email" class="form-control" id="validationCustomUsername"
+                  aria-describedby="inputGroupPrepend" formControlName="email" required />
               <label for="validationCustomUsername" class="form-label">Email*</label>
-
           </div>
+          <div *ngIf="nome.invalid && formDir.submitted" class="validation-error">
+            <p *ngIf="nome.errors?.['required']">O nome é Obrigatório</p>
+            <p *ngIf="nome.errors?.['minLength']">Numero de Caracteres insuficiente</p>
+        </div>
       </div>
       <div class="col-md-6">
           <div class="form-outline">
-              <input type="tel" class="form-control" id="validationCustom03" required />
-              <label for="validationCustom03" class="form-label">Telefone*</label>
-
+              <input type="tel" class="form-control" id="validationCustom03" formControlName="telefone" required  />
+              <label for="validationCustom03" class="form-label" >Telefone*</label>
           </div>
+          <div *ngIf="nome.invalid && formDir.submitted" class="validation-error">
+            <p *ngIf="nome.errors?.['required']">O Telefone é Obrigatório</p>
+            <p *ngIf="nome.errors?.['minLength']">Numero de Caracteres insuficiente</p>
+        </div>
       </div>
       <div class="col-md-6">
           <div class="form-outline">
-              <input type="text" class="form-control" id="validationCustom05" required />
-              <label for="validationCustom05" class="form-label">Celular*</label>
+              <input type="text" class="form-control" id="validationCustom05" formControlName="celular" required />
+              <label for="validationCustom05" class="form-label" >Celular*</label>
           </div>
+          <div *ngIf="nome.invalid && formDir.submitted" class="validation-error">
+            <p *ngIf="nome.errors?.['required']">O Celular é Obrigatório</p>
+       
+        </div>
       </div>
 
   <div class="btns" >

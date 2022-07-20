@@ -7,3 +7,9 @@
     margin-left: 1rem;
     margin-top: 1rem;    
 }
+
+#message{
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+}

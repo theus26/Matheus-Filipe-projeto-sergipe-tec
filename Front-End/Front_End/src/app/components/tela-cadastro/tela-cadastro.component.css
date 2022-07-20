@@ -19,3 +19,8 @@ h1{
 .container-main{
     margin-left: 20rem;
 }
+#message{
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from 'src/app/service/list.service'
 import {Contribuentes} from 'src/app/Contribuentes'
+
 import {ActivatedRoute, Router} from '@angular/router'
 
 
@@ -17,6 +18,8 @@ item: String = ''
 
 
 
+
+
 contribuentess = '';
 
   formModal:any;
@@ -26,10 +29,12 @@ contribuentess = '';
   }
 
   ngOnInit(): void {
+   
+
 this.formModal = new window.bootstrap.Modal(
   document.getElementById("exampleModal")
-
 );
+
     
   }
 
@@ -45,13 +50,9 @@ this.formModal = new window.bootstrap.Modal(
     this.listservice.remove(contribuente.id).subscribe()
   }
 
-  updateForm(curso){
-    this.formModal.patchValue({
-      nome: curso.nome,
-      id: curso.id
-    })
-  }
+  
 
+  
 
   openModal(event){
     this.item = event.target.parentNode.innerText
@@ -64,20 +65,12 @@ this.formModal = new window.bootstrap.Modal(
     this.formModal.hide();
   }
 
-  onEdit(x =1){
-    console.log("Editado")
-    this.router.navigate(['Editar', x], {relativeTo:this.route})
-    this.route.params.subscribe(
-      (params:any) =>{
-        const id = params = x
-        console.log(id)
-
-        const curso$ = this.listservice.loadByID(id);
-        curso$.subscribe(curso=>{
-          this.updateForm(curso)
-        })
+  onEdit(id){
+    this.router.navigate(['Editar', id], {relativeTo:this.route})
       }
-    )
+
+     
+    
   }
 
-}
+

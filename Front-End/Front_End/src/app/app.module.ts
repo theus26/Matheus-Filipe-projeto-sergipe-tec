@@ -8,7 +8,10 @@ import { TelaCadastroComponent } from './components/tela-cadastro/tela-cadastro.
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
@@ -17,12 +20,13 @@ import {HttpClientModule} from '@angular/common/http'
     TelaPrincipalComponent,
     TelaEdicaoComponent,
     TelaCadastroComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule, FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,22 +1,20 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router'
-
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tela-cadastro',
   templateUrl: './tela-cadastro.component.html',
-  styleUrls: ['./tela-cadastro.component.css']
+  styleUrls: ['./tela-cadastro.component.css'],
 })
 export class TelaCadastroComponent implements OnInit {
-  cadastroUser!: FormGroup
-  constructor( private router:Router, private route:ActivatedRoute) {
+  cadastroUser!: FormGroup;
+  Cadastrado: Boolean = false;
 
-  }
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-
     (() => {
       'use strict';
 
@@ -25,26 +23,29 @@ export class TelaCadastroComponent implements OnInit {
 
       // Loop over them and prevent submission
       Array.prototype.slice.call(forms).forEach((form) => {
-        form.addEventListener('submit', (event) => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
+        form.addEventListener(
+          'submit',
+          (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          },
+          false
+        );
       });
     })();
-
-
- 
-
 
     this.cadastroUser = new FormGroup({
       id: new FormControl(``),
       nome: new FormControl(``, [Validators.required, Validators.minLength(3)]),
-      email: new FormControl(``, [Validators.required,Validators.email]),
-      cpf: new FormControl(``, [Validators.required,Validators.maxLength(15)]),
-      telefone: new FormControl(``, [Validators.required, Validators.maxLength(11)]),
+      email: new FormControl(``, [Validators.required, Validators.email]),
+      cpf: new FormControl(``, [Validators.required, Validators.maxLength(15)]),
+      telefone: new FormControl(``, [
+        Validators.required,
+        Validators.maxLength(11),
+      ]),
       celular: new FormControl(``, [Validators.required]),
       rua: new FormControl(``, [Validators.required]),
       numero: new FormControl(``, [Validators.required]),
@@ -53,10 +54,8 @@ export class TelaCadastroComponent implements OnInit {
       estado: new FormControl(``, [Validators.required]),
       pais: new FormControl(``, [Validators.required]),
       cep: new FormControl(``, [Validators.required]),
-
     });
   }
-
 
   get nome() {
     return this.cadastroUser.get('nome')!;
@@ -105,10 +104,7 @@ export class TelaCadastroComponent implements OnInit {
     return this.cadastroUser.get('celular')!;
   }
 
-
   async submit() {
- 
-
     if (this.cadastroUser.invalid) {
       return;
     }
@@ -119,29 +115,29 @@ export class TelaCadastroComponent implements OnInit {
       telefone: this.telefone.value,
       celular: this.telefone.value,
       rua: this.rua.value,
-      numero:this.numero.value,
-      bairro:this.bairro.value,
-      cidade:this.cidade.value,
-      cep:this.cep.value,
-      estado:this.estado.value,
-      pais:this.pais.value
-    }
+      numero: this.numero.value,
+      bairro: this.bairro.value,
+      cidade: this.cidade.value,
+      cep: this.cep.value,
+      estado: this.estado.value,
+      pais: this.pais.value,
+    };
     const dataJson = JSON.stringify(data);
-    const req = await fetch("http://localhost:3000/Contribuintes", {
-      method: "POST",
-      headers: { "content-type": "application/json" }, 
+    const req = await fetch('http://localhost:3000/Contribuintes', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
       body: dataJson,
-    }); 
-    const receber = await req.json(); 
+    });
+    const receber = await req.json();
     console.log(receber);
-
-    setTimeout( () => {
-      this.router.navigate([''], {relativeTo:this.route})
-    },3000)
-
+    window.scroll({
+      top:0,
+      behavior:'smooth'
+    })
+    this.Cadastrado = true;
+    setTimeout(() => {
+     
+      this.router.navigate([''], { relativeTo: this.route });
+    }, 3000);
   }
-
-
-
-
 }
